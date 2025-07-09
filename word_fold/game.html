@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Tetris</title>
+    <!-- Tailwind CSS CDN for basic styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen p-4 font-inter">
+    <div class="container mx-auto p-6 bg-gray-800 rounded-lg shadow-xl flex flex-col items-center">
+        <h1 class="text-4xl font-bold mb-4 text-yellow-400">Word Tetris</h1>
+
+        <!-- Score display moved to the top -->
+        <div class="score-display text-2xl font-semibold text-blue-400 mb-6">Score: <span id="score">0</span></div>
+
+        <div class="game-container flex flex-col items-center">
+            <canvas id="gameCanvas" class="border-4 border-gray-600 rounded-md bg-gray-700"></canvas>
+            <div class="game-info mt-6 flex flex-col items-center space-y-4">
+                <div id="gameOverMessage" class="text-red-500 text-3xl font-bold hidden">Game Over!</div>
+                <div id="startbutton" class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105"><aStart Game
+                </div>
+                <div class="controls-info text-gray-400 text-sm mt-4 text-center">
+                    <p>Use Left/Right Arrow Keys to move blocks.</p>
+                    <p>Use Down Arrow Key to speed up falling.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<!--
+<DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Word Fold</title>
+  <link href="game.css" rel="stylesheet">
+  <script src="game.js" defer></script>
+</head>
+
+<body>
+  <div class="header">
+    <h1 class="no-margin">Word Fold</h1>
+  </div>
+  <div id="cell-holder" class="cell-holder">
+    <div class="cell" onclick="on_click(0,0)"></div>
+    <div class="cell" onclick="on_click(1,0)"></div>
+    <div class="cell" onclick="on_click(2,0)"></div>
+    <div class="cell" onclick="on_click(3,0)"></div>
+    <div class="cell" onclick="on_click(4,0)"></div>
+    <div class="cell" onclick="on_click(0,1)"></div>
+    <div class="cell" onclick="on_click(1,1)"></div>
+    <div class="cell" onclick="on_click(2,1)"></div>
+    <div class="cell" onclick="on_click(3,1)"></div>
+    <div class="cell" onclick="on_click(4,1)"></div>
+    <div class="cell" onclick="on_click(0,2)"></div>
+    <div class="cell" onclick="on_click(1,2)"></div>
+    <div class="cell" onclick="on_click(2,2)"></div>
+    <div class="cell" onclick="on_click(3,2)"></div>
+    <div class="cell" onclick="on_click(4,2)"></div>
+    <div class="cell" onclick="on_click(0,3)"></div>
+    <div class="cell" onclick="on_click(1,3)"></div>
+    <div class="cell" onclick="on_click(2,3)"></div>
+    <div class="cell" onclick="on_click(3,3)"></div>
+    <div class="cell" onclick="on_click(4,3)"></div>
+    <div class="cell" onclick="on_click(0,4)"></div>
+    <div class="cell" onclick="on_click(1,4)"></div>
+    <div class="cell" onclick="on_click(2,4)"></div>
+    <div class="cell" onclick="on_click(3,4)"></div>
+    <div class="cell" onclick="on_click(4,4)"></div>
+  </div>
+  <div class="header" id="words"></div>
+</body>
+
+</html>
+-->

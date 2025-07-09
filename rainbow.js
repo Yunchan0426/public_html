@@ -30,9 +30,9 @@ function stopRainbow() {
 
 // Function triggered by the button click on projects.html
 function onlmbclick(event) {
-    if (input && element) { // Ensure input and main element exist
+    if (input/*&&element*/) { // Ensure input and main element exist
         console.log("Applying color:", input.value);
-        stopRainbow(); 
+        startRainbow(); 
         element.style.backgroundColor = input.value; 
         // setTimeout(startRainbow, 3000); // Resume rainbow after 3 seconds
     } else {

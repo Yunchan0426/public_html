@@ -233,14 +233,14 @@ html, body {
 
 /* Description text block */
 .hero-description h2 {
-    font-size: 1.5em;
+    font-size: 2.0em;
     margin-top: 0;
     margin-bottom: 15px;
     color: var(--text-color-light);
 }
 
 .hero-description p {
-    font-size: 0.95em;
+    font-size: 1.15em;
     color: var(--text-color-light);
     opacity: 0.8;
     margin-bottom: 30px;
