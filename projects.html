@@ -14,86 +14,55 @@
 
 <body>
 
-    <div id="tswcontainer">
-        <div id="tswheader">
-            <!-- start of header section: insert your logo, etc, here -->
+    <div id="tswcontainer" class="main-wrapper">
+        <header class="main-header">
+            <div class="logo">Welcome333</div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">HOME</a></li>
+                    <li><a href="aboutme.html" class="nav-link">ABOUT ME</a></li>
+                    <li><a href="projects.html" class="nav-link current-page">PROJECTS</a></li>
+                </ul>
+            </nav>
+        </header>
 
-            <p>
-                Placeholder content for your header section. Replace it with your website's logo or name or page title
-                or whatever.
-            </p>
-            <p>&nbsp;</p>
+        <main class="page-content">
+            <div class="content-section">
+                <h1>My Projects</h1>
+                <p>pppprrrrrrroooooooojjjjjeeeeecccccccttttttttts</p>
 
-            <!-- end of header section: insert your logo, etc, above this line -->
-        </div>
-
-        <div id="tswcontent">
-            <div id="tswcontproper">
-                <!-- start of content column: insert your content here -->
-
-                <h1>Welcome</h1>
-                <p>
-                    Placeholder content. Replace everything here with your actual content.
-                </p>
-                <p>
-                    If you want a navigation menu for your side column that looks like the one on thesitewizard.com,
-                    you can generate your own and customize it, with the
-                    <a href="https://www.thesitewizard.com/wizards/css-menu-buttons.shtml">Navigation Menu Wizard</a>.
-                    It's free, just like the <a href="https://www.thesitewizard.com/wizards/layout.shtml">Layout
-                        Wizard</a>
-                    that you used to create this.
-                </p>
-                <p>
-                    And if you want a contact form (ie, one that your visitors can use to reach you), go to the
-                    <a href="https://www.thesitewizard.com/wizards/feedbackform.shtml">Feedback Form Wizard</a>
-                    to create one. Yes, it's free too.
-                </p>
-                <p>
-                    Okay, that's it. I've run out of meaningful things to say for this placeholder content, and can't be
-                    bothered to
-                    think up any more stuff that you're just going to delete anyway.
-                </p>
-                <p>
-                    All the best for your site!
-                </p>
-                <p>&nbsp;</p>
-                <input type="text" id="my-input">
-                <button onclick="onlmbclick(event)">change color</button>
-
-                <!-- end of content column: put your content above this line -->
-            </div>
-        </div>
-
-        <div id="tswsidecol">
-            <div id="tswsideproper">
-                <!-- start of side column: insert your navigation menu, etc, here -->
-
-                <div id="tswcssbuttons">
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="aboutme.html">About me</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                    </ul>
+                <div class="project-item">
+                    <h3>Project  One</h3>
+                    <p>Something about project</p>
+                    <a href="project1.html" class="btn secondary-btn">View Project Details</a>
                 </div>
 
+                <div class="project-item">
+                    <h3>Project Two</h3>
+                    <p>Hello Project</p>
+                    <a href="project2.html" class="btn secondary-btn">View Project Details</a>
+                </div>
 
-                <!-- end of side column: put your navigation menu, etc, above this line -->
+                <div class="project-item">
+                    <h3>Project Three</h3>
+                    <p>Technologia</p>
+                    <a href="project3.html" class="btn secondary-btn">View Project Details</a>
+                </div>
+
+                <div class="rainbow-control-section">
+                    <p>You can change the background color here:</p>
+                    <input type="text" id="my-input" placeholder="e.g., #FF00FF or red">
+                    <button onclick="onlmbclick(event)" class="btn primary-btn">Change Background Color</button>
+                    <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">Rainbow option</p> <!--Tommorow make this box rainbow-->
+                </div>
             </div>
-        </div>
-        <div style="clear: both;"></div>
+        </main>
 
-        <div id="tswfooter">
-            <!-- start of footer section: insert your copyright notice, etc, here -->
-
-            <p>
-                Placeholder content for the footer: please replace these words with your real content.
-            </p>
-
-            <!-- end of footer section: insert your copyright notice, etc, above this line -->
-        </div>
+        <footer class="site-footer">
+            <p>&copy; Will copyrights be reserved?</p>
+        </footer>
 
     </div>
 
 </body>
-
 </html>
