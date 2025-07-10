@@ -10,21 +10,22 @@
 </head>
 <body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen p-4 font-inter">
     <div class="container mx-auto p-6 bg-gray-800 rounded-lg shadow-xl flex flex-col items-center">
-        <h1 class="text-4xl font-bold mb-4 text-yellow-400">Word Tetris</h1>
+        <h1 class="text-4xl font-bold mb-4 text-yellow-400">Word-tris</h1>
 
-        <!-- Score display moved to the top -->
-        <div class="score-display text-2xl font-semibold text-blue-400 mb-6">Score: <span id="score">0</span></div>
+        <!-- Score display at the top -->
+        <div class="score-display text-2xl font-semibold text-blue-400 mb-3">Score<span id="score"></span></div>
 
-        <div class="game-container flex flex-col items-center">
+        <div class="game-area flex flex-col items-center">
+            <!-- Game Canvas (center box) -->
             <canvas id="gameCanvas" class="border-4 border-gray-600 rounded-md bg-gray-700"></canvas>
-            <div class="game-info mt-6 flex flex-col items-center space-y-4">
-                <div id="gameOverMessage" class="text-red-500 text-3xl font-bold hidden">Game Over!</div>
-                <div id="startbutton" class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105"><aStart Game
-                </div>
-                <div class="controls-info text-gray-400 text-sm mt-4 text-center">
-                    <p>Use Left/Right Arrow Keys to move blocks.</p>
-                    <p>Use Down Arrow Key to speed up falling.</p>
-                </div>
+
+            <!-- Start Button (smaller and higher, between canvas and text) -->
+            <a href="project.html" id="startButton" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 mt-5 mb-5">Start Game</a>
+
+            <!-- Control Instructions Text -->
+            <div class="controls-info text-gray-400 text-sm text-center">
+                <p>Use Left/Right Arrow Keys to move blocks.</p>
+                <p>Use Down Arrow Key to speed up falling.</p>
             </div>
         </div>
     </div>
@@ -32,6 +33,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 <!--
 <DOCTYPE html>
 <html lang="en">

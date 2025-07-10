@@ -1,41 +1,3 @@
-/*body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-}
-
-.cell-holder {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    width: 50%;
-    aspect-ratio: 1/1;
-    gap: 8px;
-}
-
-.cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: lightgray;
-    font-size: larger;
-    overflow-wrap: anywhere;
-}
-
-.cell.selected {
-    border: yellow solid 8px;
-}
-
-.no-margin {
-    margin: 0 0;
-}
-*/
-/* Custom CSS for Word Tetris */
 
 /* Ensure the body uses the Inter font, if available, and set dark background with white text */
 body {
@@ -101,3 +63,41 @@ canvas {
 .controls-info p {
     color: #ffffff;
 }
+/*body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.cell-holder {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    width: 50%;
+    aspect-ratio: 1/1;
+    gap: 8px;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    font-size: larger;
+    overflow-wrap: anywhere;
+}
+
+.cell.selected {
+    border: yellow solid 8px;
+}
+
+.no-margin {
+    margin: 0 0;
+}
+*/
+/* Custom CSS for Word Tetris */
