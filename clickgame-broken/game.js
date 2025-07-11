@@ -40,13 +40,23 @@ function buy(store) {
     // clone node for widget, and add to container
     const widget = store.firstElementChild.cloneNode(true);
     widget.onclick = () => {
-        harvest(widget);
+        if (widget.getAttribute("position") == "hunter") {
+            hunt(widget);
+        } else {
+            harvest(widget);
+        }
     }
     widget_container.appendChild(widget);
 
     if (widget.getAttribute("auto") == 'true') {
-        widget.setAttribute("harvesting", "");
-        setup_end_harvest(widget);
+        if (widget.getAttribute("position") == "harvest") {
+            widget.setAttribute("harvesting", "");
+            setup_end_harvest(widget);
+        } 
+        else { 
+            widget.setAttribute("hunting", "");
+            setup_end_hunt(widget);
+        }
     }
 }
 
@@ -57,6 +67,16 @@ function setup_end_harvest(widget) {
         // If automatic, start again
         if (widget.getAttribute("auto") == 'true') {
             harvest(widget);
+        }
+    }, parseFloat(widget.getAttribute("cooldown")) * 1000);
+}
+
+function setup_end_hunt(widget) {
+    setTimeout(() => {
+        widget.removeAttribute("hunting");
+        // If automatic, start again
+        if (widget.getAttribute("auto") == 'true') {
+            hunt(widget);
         }
     }, parseFloat(widget.getAttribute("cooldown")) * 1000);
 }
@@ -74,10 +94,22 @@ function harvest(widget) {
     setup_end_harvest(widget);
 }
 
+function hunt(widget) {
+    // Only run if currently not hunting
+    if (widget.hasAttribute("hunting")) return;
+    // Set hunting flag
+    widget.setAttribute("hunting", "");
+
+    // If manual, collect points now
+    changeScore(-1*parseInt(widget.getAttribute("reap")));
+    showPoint(widget);
+
+    setup_end_hunt(widget);
+}
 
 function showPoint(widget) {
     let number = document.createElement("span");
-    if (widget.getAttribute("reap")) { 
+    if (widget.getAttribute("position") == "harvest") { 
         number.className = "pluspoint";
         number.innerHTML = " + " + widget.getAttribute("reap");
     }
