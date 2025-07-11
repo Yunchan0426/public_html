@@ -3,12 +3,14 @@ const stores = document.getElementsByClassName("store");
 const score_element = document.getElementById("score");
 let score = 5;
 let super_gompei_count = 0;
+let wolf_start = false;
 
 function changeScore(amount) {
     score += amount;
     //set score element
     score_element.innerHTML = "Score: " + score;
     // Update the stores to show ones that are too expensive
+    if (score>=1000) wolf_start = true;
     for (let store of stores) {
         let cost = parseInt(store.getAttribute("cost"));
 
@@ -60,6 +62,18 @@ function buy(store) {
     }
 }
 
+function wolfAppears() {
+    if (wolf_start) {
+        const gompeis = widget_container.querySelectorAll('[name*="Gompei"');
+        setTimeout(() => {
+            const proportionalTime = Math.floor(Math.random() * gompeis.length);
+            const wolfWidget = store.firstElementChild.cloneNode(true);
+            //should append wolf in widget-container after random second proportional to gompeis' number!
+        })
+    }
+
+}
+
 function setup_end_harvest(widget) {
     setTimeout(() => {
         // Remove the harvesting flag
@@ -101,21 +115,48 @@ function hunt(widget) {
     widget.setAttribute("hunting", "");
 
     // If manual, collect points now
-    changeScore(-1*parseInt(widget.getAttribute("reap")));
-    showPoint(widget);
-
+    if (widget.getAttribute("name") == "Farmer") {
+        changeScore(-1*parseInt(widget.getAttribute("reap")));
+        showPoint(widget);
+    }
+    if (widget.getAttribute("name") == "Wolf") {
+        if (wolf(widget)) return;
+    }
     setup_end_hunt(widget);
+}
+
+function wolf(wolfWidget) {
+    const gompeis = widget_container.querySelectorAll('[name*="Gompei"');
+    const farmerWidget = document.querySelector("#widget-container #farmer");
+    if (farmerWidget) {
+        widget_container.removeChild(farmerWidget);
+        widget_container.removeChild(wolfWidget);
+        return true;
+    }
+    else if (gompeis.length > 0) {
+        const numbersToEat = Math.floor(Math.random() * gompeis.length);
+        for (numbersToEat; numbersToEat > 0; numbersToEat--)  {
+            const gompeisToEat = gompeis[Math.floor(Math.random() *gompeis.length)];
+            if (gompeisToEat.querrySelector("#widget-container #super-gompei")) {
+                super_gompei_count = 0;
+                document.body.style = "--gompei-count: " + super_gompei_count + ";"
+            }
+            widget_container.removeChild(gompeisToEat);
+            return true;
+        }
+    }
+    return false;
 }
 
 function showPoint(widget) {
     let number = document.createElement("span");
-    if (widget.getAttribute("position") == "harvest") { 
-        number.className = "pluspoint";
-        number.innerHTML = " + " + widget.getAttribute("reap");
-    }
-    else {
+    if (widget.getAttribute("position") == "hunter") { 
         number.className = "minuspoint";
         number.innerHTML = " - " + widget.getAttribute("reap");
+    }
+    else {
+        number.className = "pluspoint";
+        number.innerHTML = " + " + widget.getAttribute("reap");
     }
     number.onanimationend = () => {
         widget.removeChild(number);
