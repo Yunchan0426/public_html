@@ -39,6 +39,12 @@ body {
     position: relative;
 }
 
+.store[name="Wolf"] {
+    margin-left: auto;
+    background-color: rgb(212, 72, 25);
+    cursor: not-allowed
+}
+
 .store p {
     margin: 2px;
     position: relative;
@@ -58,6 +64,10 @@ body {
     overflow: hidden;
     color: white;
     position: relative;
+}
+
+.widget[name="Wolf"] {
+    cursor:not-allowed
 }
 
 .store[broke] {

@@ -4,13 +4,20 @@ const score_element = document.getElementById("score");
 let score = 5;
 let super_gompei_count = 0;
 let wolf_start = false;
+let wolf_Creating = false;
 
 function changeScore(amount) {
     score += amount;
     //set score element
     score_element.innerHTML = "Score: " + score;
     // Update the stores to show ones that are too expensive
-    if (score>=1000) wolf_start = true;
+    if (score>=1000) {
+        wolf_start = true;
+    }
+    if (wolf_start && !wolf_Creating) {
+        wolf_Creating = true;
+        wolfAppears();
+    }
     for (let store of stores) {
         let cost = parseInt(store.getAttribute("cost"));
 
@@ -63,16 +70,21 @@ function buy(store) {
 }
 
 function wolfAppears() {
-    if (wolf_start) {
-        const gompeis = widget_container.querySelectorAll('[name*="Gompei"');
-        setTimeout(() => {
-            const proportionalTime = Math.floor(Math.random() * gompeis.length);
-            const wolfWidget = store.firstElementChild.cloneNode(true);
-            //should append wolf in widget-container after random second proportional to gompeis' number!
-        })
-    }
+    const randomInterval = Math.random() * 2000 + 8000; // 8-10 seconds
+    setTimeout(() => {
+        const wolfStoreItem = document.querySelector('.store[name="Wolf"]');
+        const wolfWidget = wolfStoreItem.firstElementChild.cloneNode(true);
+        widget_container.appendChild(wolfWidget);
+        wolf_Creating = false;
 
+        // Make the wolf hunt automatically
+        if (wolfWidget.getAttribute("auto") == 'true') {
+            wolfWidget.setAttribute("hunting", "");
+            setup_end_hunt(wolfWidget);
+        } 
+    }, randomInterval);
 }
+
 
 function setup_end_harvest(widget) {
     setTimeout(() => {
@@ -120,30 +132,33 @@ function hunt(widget) {
         showPoint(widget);
     }
     if (widget.getAttribute("name") == "Wolf") {
-        if (wolf(widget)) return;
+        wolf(widget);
     }
     setup_end_hunt(widget);
 }
 
 function wolf(wolfWidget) {
-    const gompeis = widget_container.querySelectorAll('[name*="Gompei"');
-    const farmerWidget = document.querySelector("#widget-container #farmer");
+    console.log("Wolf is hunting...");
+    let gompeis = widget_container.querySelectorAll('.widget[name="Gompei"], .widget[name="Super-Gompei"]');
+    let farmerWidget = widget_container.querySelector("#widget-container .widget[name='Farmer']");
     if (farmerWidget) {
         widget_container.removeChild(farmerWidget);
         widget_container.removeChild(wolfWidget);
         return true;
     }
     else if (gompeis.length > 0) {
-        const numbersToEat = Math.floor(Math.random() * gompeis.length);
-        for (numbersToEat; numbersToEat > 0; numbersToEat--)  {
-            const gompeisToEat = gompeis[Math.floor(Math.random() *gompeis.length)];
-            if (gompeisToEat.querrySelector("#widget-container #super-gompei")) {
+        console.log("Wolf found Gompeis to eat: " + gompeis.length);
+        let numbersToEat = Math.floor(Math.random() * gompeis.length);
+        for (; numbersToEat > 0; numbersToEat--)  {
+            const gompeiToEat = gompeis[Math.floor(Math.random() *gompeis.length)];
+            if (gompeiToEat.getAttribute("name") == "Super-Gompei") {
                 super_gompei_count = 0;
                 document.body.style = "--gompei-count: " + super_gompei_count + ";"
             }
-            widget_container.removeChild(gompeisToEat);
-            return true;
+            console.log("Wolf eats: " + gompeiToEat.getAttribute("name"));
+            widget_container.removeChild(gompeiToEat);
         }
+        return true;
     }
     return false;
 }
