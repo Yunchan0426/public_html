@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Tetris</title>
+    <!-- Tailwind CSS CDN for basic styling -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <script src="main.js" defer></script>
+    <!-- <link href="dist/output.css" rel="stylesheet"> -->
+    <link href="new.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-weight: bold; margin-bottom: 2%; color: hsl(48, 96%, 53%)">Word-tris</h1>
+
+        <!-- Score display at the top -->
+        <div class="score-display">Score: <span id="score">0</span></div>
+
+        <div class="game-area">
+            <!-- Game Canvas (center box) -->
+            <!-- <canvas id="gameCanvas" class="border-4 border-gray-600 rounded-md bg-gray-700"></canvas> -->
+            <div>
+                <table id="gamezone">
+                    <!-- Cells Here -->
+                </table>
+            </div>
+
+            <!-- Start Button (smaller and higher, between canvas and text) -->
+            <button id="startButton" onclick="onStartGame(event)">Start Game</button>
+
+            <!-- Control Instructions Text -->
+            <div class="controls-info">
+                <p>Use Left/Right Arrow Keys to move blocks.</p>
+                <p>Use Down Arrow Key to speed up falling.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="info" status="no">
+    </div>
+
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>

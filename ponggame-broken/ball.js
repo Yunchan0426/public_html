@@ -4,6 +4,7 @@ class Ball {
     velx;
     vely;
     inPlay;
+    attackSide = SIDE.LEFT;
 
     constructor(posx, posy, velx, vely) {
         this.posx = posx;
@@ -26,8 +27,8 @@ class Ball {
             let side = thing.bounce(this);
             if (side != SIDE.NONE) return side;
         }
-        if (this.posx + BALL_RADIUS > BOARD_WIDTH) return SIDE.RIGHT; // Someone got a point...
-        if (this.posx + BALL_RADIUS < 0) return SIDE.LEFT; // Someone got a point...
+        if (this.posx + BALL_RADIUS > BOARD_WIDTH) return SIDE.LEFT; // Someone got a point...
+        if (this.posx + BALL_RADIUS < 0) return SIDE.RIGHT; // Someone got a point...
 
         return SIDE.NONE;
     }
@@ -39,6 +40,30 @@ class Ball {
         if (this.posy + BALL_RADIUS > BOARD_HEIGHT) {
             this.vely = -Math.abs(this.vely);
         }
+        if (this.posx - BALL_RADIUS < 0) {
+            if (0 <= this.posy < BOARD_HEIGHT / 2) {
+                document.dispatchEvent(new CustomEvent('inBonusZone', {
+                    detail: { message: SIDE.LEFT, timestamp: Date.now() }
+                }));
+            }
+            this.velx = Math.abs(this.velx);
+        }
+        if (this.posx + BALL_RADIUS > BOARD_WIDTH) {
+            if (0 <= this.posy < BOARD_HEIGHT / 2) {
+                document.dispatchEvent(new CustomEvent('inBonusZone', {
+                    detail: { message: SIDE.RIGHT, timestamp: Date.now() }
+                }));
+            }
+            this.velx = -Math.abs(this.velx);
+        }
+    }
+
+    setAttackSide(side) {
+        this.attackSide = side;
+        const event = new CustomEvent('attackSideChange', {
+            detail: { message: side, timestamp: Date.now()}
+        });
+        document.dispatchEvent(event);
     }
 
     // bounceLeftPaddle(paddle) {

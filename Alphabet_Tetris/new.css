@@ -1,0 +1,135 @@
+body {
+    background-color: hsl(221, 56%, 15%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 98vh;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    padding: 1em 37%;
+    background-color: hsl(215, 28%, 17%);
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-display {
+    font-weight:600; 
+    color:hsl(210, 75%, 64%); 
+    margin-bottom: 3%;
+    font-size: 1.5em;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gameCell {
+    display: flex;
+    min-width: 30px;
+    min-height: 30px;
+    border: 2px solid;
+    border-radius: 4px;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.gameCell[status="active"] {
+    background-color: hsl(120, 100%, 25%);
+    border-color: hsl(120, 100%, 10%);
+}
+
+.gameCell[status="passive"] {
+    background-color: hsl(1.5, 64.4%, 49.6%);
+    border-color: hsl(1.5, 64.4%, 34.6%);
+}
+
+.gameCell[status="none"] {
+    background-color: hsl(203,0%,7%);
+    border-color: hsl(203, 0%, 7%);
+}
+
+#gamezone {
+    border: 10px hsl(203,0%,7%);
+    border-radius: 5px;
+    background-color: hsl(203,0%,7%);
+}
+
+.gameRow{
+    display: flex;
+    flex-direction: row;
+}
+
+#startButton {
+    padding: 4% 10%;
+    background-color: hsl(142, 76%, 36%);
+    border: 0px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#startButton:hover {
+    background-color: green;
+}
+
+.controls-info {
+    color: hsl(203,0%,53%);
+    font-size: 0.7em;
+    justify-content: center;
+}
+
+.info {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: hsla(203, 0%, 3%, 0.6);
+
+    flex-direction: row;
+
+    margin: 0px;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.info[status="no"] {
+    display: none
+}
+
+.info[status="loading"] {
+    display: flex;
+    font-size: 7em;
+}
+
+.info[status="start"] {
+    display: flex;
+}
+
+.info[start="start"] p {
+    font-size: 10em;
+}
+
+.info[status="end"] {
+    display: flex;
+}
+
+.info[start="end"] p {
+    font-size: 7em;
+}

@@ -5,7 +5,10 @@ class Paddle {
     posy;
     width;
     height;
+    maxHeight = BOARD_HEIGHT;
+    minHeight = 0;
     color;
+    ctrl = new keyControlArr();
     constructor(posx, posy, width, height, side, color) {
         this.posx = posx;
         this.posy = posy;
@@ -14,6 +17,7 @@ class Paddle {
         this.color = color;
         this.side = side;
         this.vely = 0;
+        this.ctrl = new keyControlArr();
     }
 
     move(is_cpu, ball) {
@@ -24,25 +28,34 @@ class Paddle {
 
             // control this.vy using ball
             // don't set this.y! (cheating)
-            let desired = ball.posy - this.height / 2;
-            let vel = desired - this.posy;
-            this.vely = vel;
+            this.vely = Math.sign(ball.posy - this.posy - this.height / 2 ) * PADDLE_VELOCITY;
         }
-        this.posy = Math.min(BOARD_HEIGHT - this.height, Math.max(0, this.posy + this.vely));
+        this.posy = Math.min(this.maxHeight - this.height, Math.max(this.minHeight, this.posy + this.vely));
     }
 
     bounce(ball) {
         let bounce_dir = Math.sign(BOARD_WIDTH / 2 - this.posx);
         // try bounce ball
         if (ball.posy >= this.posy && ball.posy <= this.posy + this.height && // within y
-            (ball.posx - BALL_RADIUS <= this.posx + this.width && ball.posx + BALL_RADIUS >= this.posx) &&  // within x 
+            ((this.side == SIDE.LEFT && ball.posx - BALL_RADIUS <= this.posx + this.width) || (this.side == SIDE.RIGHT && ball.posx + BALL_RADIUS >= this.posx)) &&  // within x 
             ball.velx * bounce_dir < 0 // ball going into wall
         ) {
             ball.velx = bounce_dir * PADDLE_FORCE * Math.abs(ball.velx);
+            ball.setAttackSide(this.side);
             return SIDE.NONE;
         }
 
         return SIDE.NONE;
+    }
+
+    refreshVel() {
+        const top = this.ctrl.getKey();
+        if (top == KEYS.UP)
+            this.vely = -PADDLE_VELOCITY;
+        else if (top == KEYS.DOWN)
+            this.vely = PADDLE_VELOCITY;
+        else 
+            this.vely = 0;
     }
 }
 

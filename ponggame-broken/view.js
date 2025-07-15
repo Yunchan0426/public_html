@@ -4,7 +4,7 @@ const cpucheck = document.getElementById("cpucheck");
 const scoreboard = document.getElementById("scoreboard");
 
 function updateScore(model) {
-    scoreboard.innerHTML = `${model.scoreL} : ${model.scoreR}`;
+    scoreboard.innerHTML = `${model.winsL} | ${model.scoreL} : ${model.scoreR} | ${model.winsR}`;
 }
 
 function draw_game(model) {
@@ -16,21 +16,37 @@ function draw_game(model) {
 }
 
 function draw_ball(ctx, ball) {
-    ctx.fillStyle = "hotpink";
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(ball.posx - ball.velx*2, ball.posy - ball.vely*2, BALL_RADIUS, 0, 2*Math.PI);
+    ctx.fillStyle = "black";
+    ctx.fill();
 
     ctx.beginPath();
-    ctx.arc(ball.posx, ball.posy, BALL_RADIUS,  0, 2 * Math.PI);
-    ctx.stroke();
+    ctx.arc(ball.posx, ball.posy, BALL_RADIUS, 0, 2*Math.PI);
+    ctx.fillStyle = "pink";
     ctx.fill();
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+
+}
+
+function resestCtxShadow(ctx) {
+    ctx.shadowColor = 'rgba(0 0 0 0)';
+    ctx.shadowOffsetX = 0;
+    ctx.shadowBlur = 0;
 }
 
 function draw_paddle(ctx, paddle) {
-    ctx.fillStyle = paddle.color;
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
+    ctx.save();
 
-    ctx.fillRect(paddle.posx, paddle.posy, PADDLE_WIDTH, PADDLE_HEIGHT);
-    ctx.strokeRect(paddle.posx, paddle.posy, PADDLE_WIDTH, PADDLE_HEIGHT);
+    ctx.fillStyle = "black"; 
+    ctx.fillRect(paddle.posx, paddle.posy - paddle.vely, paddle.width, paddle.height);
+
+    ctx.fillStyle = paddle.color;
+    ctx.fillRect(paddle.posx, paddle.posy, paddle.width, paddle.height);
+
+    ctx.strokeStyle = "black";
+    ctx.strokeRect(paddle.posx, paddle.posy, paddle.width, paddle.height);
+
+    ctx.restore();
 }

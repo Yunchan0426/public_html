@@ -25,3 +25,25 @@ h3 {
     height: 50px;
     font-family: 'Courier New', Courier, monospace;
 }
+
+#overlay {
+    position: absolute;
+    top: 0; left: 0;
+    min-width: 100vw; min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#overlay p {
+    width: 15%;
+    height: 50%;
+}
+
+#overlay[status="show"] {
+    display: flex;
+}
+
+#overlay[status="no"] {
+    display: none;
+}
