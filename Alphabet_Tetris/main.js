@@ -113,7 +113,7 @@ function swapCell(cell1, cell2) {
 
 
 function getFile(overlayScreen) {
-    fetch("https://raw.githubusercontent.com/skim14-1/public_html/refs/heads/main/Alphabet-Tetris/words-uppercase.txt?token=GHSAT0AAAAAADHKOY76HPGBS4MMU63X7MVG2DU7J2A")
+    fetch("/word.txt")
         .then(response => response.text())
         .then(data => {
             wordsTrie = data.split(separator = '\n').map(word => word.trim())/*.sort()*/;

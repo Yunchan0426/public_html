@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 class TrieNode {
 public:
     TrieNode* children[26];
@@ -19,12 +21,12 @@ void insert(TrieNode* root, const std::string& word) {
     TrieNode* curr = root;
 
     for (char c : word) {
-        if (curr->children[c -'a'] == nullptr) {
+        if (curr->children[c - 'a'] == nullptr) {
             TrieNode* newNode = new TrieNode();
 
             curr->children[c - 'a'] = newNode;
         }
-        curr = curr->children[c-'a'];
+        curr = curr->children[c - 'a'];
     }
     curr->EOW = true;
 };
@@ -32,16 +34,16 @@ void insert(TrieNode* root, const std::string& word) {
 bool search(TrieNode* root, const std::string& word) {
     TrieNode* curr = root;
 
-    for (char c : word) {
-        if (curr->children[c - 'a'] == nullptr) {
-            return false;
+    for (char c : word) { // for all letter c in word (with conserving the order of `word`)
+        if (curr->children[c - 'a'] == nullptr) { // if letter c doesn't exist in the children of curr
+            return false; // return false
         }
-        curr = curr->children[c - 'a'];
+        curr = curr->children[c - 'a']; // if not, move to the corresponding children, and do the loop again
     }
     return curr->EOW;
 };
 
-bool profix(TrieNode*root, const std::string& word) {
+bool profix(TrieNode* root, const std::string& word) {
     TrieNode* curr = root;
 
     for (char c : word) {
@@ -56,35 +58,7 @@ bool profix(TrieNode*root, const std::string& word) {
 
 int main() {
     TrieNode* root = new TrieNode();
-    vector<string> arr = {};
+    vector<string> ;
 
-    for (const string &s : arr) 
+
 }
-
-
-/*#include <iostream>
-
-class TrieNode
-{
-    TrieNode *chrn[26];
-    bool EOW;
-
-    TrieNode()
-    {
-        EOW = false;
-        for (int i = 0; i < 26; i++)
-            chrn[i] = nullptr;
-    }
-};
-
-class Trie
-{
-private:
-    TrieNode *root;
-
-public:
-    Trie()
-    {
-        root = new TrieNode();
-    }
-};*/
