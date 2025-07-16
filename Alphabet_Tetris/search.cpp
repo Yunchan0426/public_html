@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -15,38 +17,63 @@ public:
             children[i] = nullptr;
         }
     }
+
+    ~TrieNode() {
+        for (int i = 0; i < 26; i++) {
+            if (children[i] != nullptr) {
+                delete children[i];
+            }
+        }
+    }
 };
 
 void insert(TrieNode* root, const std::string& word) {
     TrieNode* curr = root;
 
     for (char c : word) {
-        if (curr->children[c - 'a'] == nullptr) {
+        // Add robustness: ignore characters that are not lowercase letters
+        if (c < 'a' || c > 'z') {
+            continue;
+        }
+        int index = c - 'a';
+        if (curr->children[index] == nullptr) {
             TrieNode* newNode = new TrieNode();
 
-            curr->children[c - 'a'] = newNode;
+            curr->children[index] = newNode;
         }
-        curr = curr->children[c - 'a'];
+        curr = curr->children[index];
     }
-    curr->EOW = true;
+    // Only mark as a word if it contained at least one valid character
+    if (curr != root) {
+        curr->EOW = true;
+    }
 };
 
 bool search(TrieNode* root, const std::string& word) {
     TrieNode* curr = root;
 
     for (char c : word) { // for all letter c in word (with conserving the order of `word`)
-        if (curr->children[c - 'a'] == nullptr) { // if letter c doesn't exist in the children of curr
+        // If a character is invalid, the word cannot exist in our Trie
+        if (c < 'a' || c > 'z') {
+            return false;
+        }
+        int index = c - 'a';
+        if (curr->children[index] == nullptr) { // if letter c doesn't exist in the children of curr
             return false; // return false
         }
-        curr = curr->children[c - 'a']; // if not, move to the corresponding children, and do the loop again
+        curr = curr->children[index]; // if not, move to the corresponding children, and do the loop again
     }
     return curr->EOW;
 };
 
-bool profix(TrieNode* root, const std::string& word) {
+bool prefix(TrieNode* root, const std::string& word) {
     TrieNode* curr = root;
 
     for (char c : word) {
+        // If a character is invalid, it cannot be a prefix
+        if (c < 'a' || c > 'z') {
+            return false;
+        }
         int index = c - 'a';
         if (curr->children[index] == nullptr) {
             return false;
@@ -58,7 +85,25 @@ bool profix(TrieNode* root, const std::string& word) {
 
 int main() {
     TrieNode* root = new TrieNode();
-    vector<string> ;
+    vector<string> wordOrigin;
+    const string FILEPATH = "words.txt";
+    string wordFromFile;
+    ifstream wordFile(FILEPATH);
+    // Example usage of your Trie functions:
+    if (!wordFile.is_open()) {
+        cerr << "Error: Could not open words.txt" << endl;
+        return 1; // Exit with and error
+    }
+
+    while (wordFile >> wordFromFile) {
+        wordOrigin.push_back(wordFromFile);
+    }
+    wordFile.close();
 
 
+    int left = 0;
+    //int right = wordOrigin.size() - 1;
+
+    delete root; // Free the allocated memory to prevent leaks
+    return 0;    // Indicate successful program execution
 }
